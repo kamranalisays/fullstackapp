@@ -1,10 +1,10 @@
 import React from "react";
 
-const Users= () => {
+const User= () => {
 
         return <h1> list of users </h1>;
 
 };
 
 
-export default Users;
+export default User;

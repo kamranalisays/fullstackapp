@@ -4,23 +4,40 @@ const bodyParser= require('body-parser');
 
 
 // Custom require modules
+
+// routes
 const placesRoutes = require('./routes/places-routes');
+
+// model
+const customHttpError = require('./models/CustomHttpError');
+
+// constant
+const customMessages = require('./constants/CustomMessages');
+
+// Utilities
+const errorHandler = require('./utilities/ErrorHandler');
 
 
 // declarations
 const app = express();
 
 
+// helper libraries
 app.use(bodyParser.json());
 
+
+//routes
 app.use('/api/places',placesRoutes);
 
 
-app.use((error ,req ,res , next ) => {
-  
-   res.status(error.code || 500).json({message : error.message || "unknown error"});
 
-});
+
+// errors
+app.use(errorHandler.noRouteFoundErrorHandler);
+app.use(errorHandler.generalErrorHandler);
+
+
+
 
 
 app.listen(5000);

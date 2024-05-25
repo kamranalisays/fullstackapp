@@ -1,6 +1,7 @@
-const CustomHttpError = require('../models/CustomHttpError');
-const customMessages = require('../utilities/CustomMessages');
+const customHttpError = require('../models/CustomHttpError');
+const customMessages = require('../constants/CustomMessages');
 const dummyData = require('../dummy/dummydata');
+
 
 
 const getPlaceById =  (req ,res , next) => {
@@ -13,7 +14,7 @@ const getPlaceById =  (req ,res , next) => {
     
       if(!place){
   
-        return  next (new CustomHttpError( customMessages.NO_DATA_FOUND , 404));
+        return  next (new customHttpError( customMessages.NO_DATA_FOUND , 404));
 
       }
       else {
@@ -32,7 +33,7 @@ const getPlacesByUserId =  (req ,res , next) => {
     
       if(!places){
   
-        return  next (new CustomHttpError( customMessages.NO_DATA_FOUND , 404));
+        return  next (new customHttpError( customMessages.NO_DATA_FOUND , 404));
 
       }
       else {
@@ -44,9 +45,16 @@ const getPlacesByUserId =  (req ,res , next) => {
 
 const createPlace =  (req ,res , next) => {
   console.log('POST createPlace ');
-  console.log('POST createPlace ='+ req.body);
- // const   { title , description , coordinates , address , creator} = req.body; 
-  res.json({"value" :req.body.title});
+
+  const   { title , description , coordinates , address , creator} = req.body; 
+
+  const createdPlace = { title , description , location :coordinates , address , creator }; 
+
+  dummyData.push(createdPlace);
+
+
+  console.log('POST createPlace  dummyData='+ JSON.stringify(dummyData) );
+  res.status(201).json(createdPlace);
  
 }
 

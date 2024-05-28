@@ -7,11 +7,13 @@ const  customMessages =  require('../constants/CustomMessages');
 
 
  const noRouteFoundErrorHandler = ( req , res , next ) => {
+    console.log(noRouteFoundErrorHandler);
      next (new customHttpError( customMessages.NO_ROUTE_FOUND , 404));
  }
 
 
 const generalErrorHandler= (error ,req ,res , next ) => {
+    console.log(generalErrorHandler);
    res.status(error.code || 500).json({message : error.message || "unknown error"});
 }
 

@@ -1,5 +1,5 @@
 
-const DUMMY_PLACES = [
+let  DUMMY_PLACES = [
     {
       id: 'p1',
       title: 'Empire State Building',
